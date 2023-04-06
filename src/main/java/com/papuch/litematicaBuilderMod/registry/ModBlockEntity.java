@@ -1,14 +1,18 @@
 package com.papuch.litematicaBuilderMod.registry;
 
-import com.papuch.litematicaBuilderMod.LitematicaBuilderMod;
 import com.papuch.litematicaBuilderMod.blockEntity.ActiveProviderChestBlockEntity;
-import net.minecraft.block.entity.BlockEntity;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 
 public class ModBlockEntity {
 
 
+    public static final BlockEntityType<ActiveProviderChestBlockEntity> activeProviderChestBlockEntity;
 
-    public static final BlockEntityType<ActiveProviderChestBlockEntity> activeProviderChestBlockEntityType; = Registry.register(Registry.BLOCK_ENTITY_TPYE, new Identifier(LitematicaBuilderMod.modId , "active_provider_chest_block_entity"), FabricBlockEntityTypeBuilder.create(ActiveProviderChestBlockEntity::new, BOX_BLOCK).build(null));
+
+    static {
+        activeProviderChestBlockEntity = Registry.register(Registries.BLOCK_ENTITY_TYPE, ModIdentifiers.activeProviderChest, FabricBlockEntityTypeBuilder.create(ActiveProviderChestBlockEntity::new, ModBlock.activeProviderChestBlock).build(null));
+    }
 }

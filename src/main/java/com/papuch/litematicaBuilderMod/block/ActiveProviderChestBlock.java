@@ -1,6 +1,6 @@
 package com.papuch.litematicaBuilderMod.block;
 
-import com.papuch.litematicaBuilderMod.gui.BoxBlockEntity;
+import com.papuch.litematicaBuilderMod.blockEntity.ActiveProviderChestBlockEntity;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
@@ -52,8 +52,8 @@ public class ActiveProviderChestBlock  extends BlockWithEntity {
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof BoxBlockEntity) {
-                ItemScatterer.spawn(world, pos, (BoxBlockEntity)blockEntity);
+            if (blockEntity instanceof ActiveProviderChestBlockEntity) {
+                ItemScatterer.spawn(world, pos, (ActiveProviderChestBlockEntity)blockEntity);
                 // update comparators
                 world.updateComparators(pos,this);
             }
