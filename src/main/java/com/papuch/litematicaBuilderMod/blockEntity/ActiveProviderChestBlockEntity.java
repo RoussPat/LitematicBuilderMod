@@ -1,6 +1,8 @@
 package com.papuch.litematicaBuilderMod.blockEntity;
 
-import com.papuch.litematicaBuilderMod.registry.ModBlocks;
+import com.papuch.litematicaBuilderMod.gui.LogisticsChestScreenHandler;
+import com.papuch.litematicaBuilderMod.registry.ModBlockEntity;
+import com.papuch.litematicaBuilderMod.util.ImplementedInventory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,7 +20,7 @@ public class ActiveProviderChestBlockEntity extends BlockEntity implements Named
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(9, ItemStack.EMPTY);
 
     public ActiveProviderChestBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlocks.activeProviderChestBlock, pos, state);
+        super(ModBlockEntity.activeProviderChestBlockEntity, pos, state);
     }
 
 
@@ -37,7 +39,7 @@ public class ActiveProviderChestBlockEntity extends BlockEntity implements Named
     public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
         //We provide *this* to the screenHandler as our class Implements Inventory
         //Only the Server has the Inventory at the start, this will be synced to the client in the ScreenHandler
-        return new BoxScreenHandler(syncId, playerInventory, this);
+        return new LogisticsChestScreenHandler(syncId, playerInventory, this);
     }
 
     @Override
@@ -55,9 +57,8 @@ public class ActiveProviderChestBlockEntity extends BlockEntity implements Named
     }
 
     @Override
-    public NbtCompound writeNbt(NbtCompound nbt) {
+    public void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
         Inventories.writeNbt(nbt, this.inventory);
-        return nbt;
     }
 }

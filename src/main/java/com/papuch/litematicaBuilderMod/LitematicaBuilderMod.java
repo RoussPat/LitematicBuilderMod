@@ -1,8 +1,5 @@
 package com.papuch.litematicaBuilderMod;
 
-import com.papuch.litematicaBuilderMod.registry.ModBlockItem;
-import com.papuch.litematicaBuilderMod.registry.ModBlocks;
-import com.papuch.litematicaBuilderMod.registry.ModItems;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -13,6 +10,7 @@ import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
 public class LitematicaBuilderMod implements ModInitializer {
     // This logger is used to write text to the console and the log file.
     // It is considered best practice to use your mod id as the logger's name.
@@ -21,7 +19,11 @@ public class LitematicaBuilderMod implements ModInitializer {
     public static final String modId = "litematicbuildermod";
     public static final Logger LOGGER = LoggerFactory.getLogger(modId);
 
-    private static final ItemGroup itemGroup = FabricItemGroup.builder(new Identifier("litematicaBuilderMod", "Chests")).icon(() -> new ItemStack(Items.CHEST_MINECART)).build();
+    public static final ItemGroup itemGroup = FabricItemGroup.builder(new Identifier("litematicaBuilderMod", "Chests")).icon(() -> new ItemStack(Items.CHEST_MINECART)).build();
+
+    static {
+
+    }
 
     @Override
     public void onInitialize() {
@@ -34,12 +36,6 @@ public class LitematicaBuilderMod implements ModInitializer {
         ItemGroupEvents.modifyEntriesEvent(itemGroup).register(content -> {
             content.add(Items.CHEST_MINECART);
         });
-
-
-        //Register Items
-        ModItems.registerItems();
-        ModBlocks.registerBlocks();
-        ModBlockItem.registerBlockItems();
 
     }
 }
